@@ -21,9 +21,9 @@ class Solution {
       auto left = nums[order[left_i]], right = nums[order[right_i]];
       auto sum = left + right;
       if (sum < target) {
-        left_i++;
+        ++left_i;
       } else if (sum > target) {
-        right_i--;
+        --right_i;
       } else {
         break;
       }

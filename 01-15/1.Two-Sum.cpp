@@ -10,25 +10,15 @@ using namespace std;
 class Solution {
  public:
   vector<int> twoSum(vector<int>& nums, int target) {
-    vector<int> order(nums.size());
-    iota(order.begin(), order.end(), 0);
-    sort(order.begin(), order.end(), [&](auto a, auto b) {
-      return nums[a] < nums[b];
-    });
+    unordered_map<int, int> num_to_index;
 
-    int left_i = 0, right_i = nums.size() - 1;
-    while (true) {
-      auto left = nums[order[left_i]], right = nums[order[right_i]];
-      auto sum = left + right;
-      if (sum < target) {
-        ++left_i;
-      } else if (sum > target) {
-        --right_i;
-      } else {
-        break;
+    for (int i = 0; i < nums.size(); i++) {
+      if (num_to_index.count(target - nums[i])) {
+        return {num_to_index[target - nums[i]], i};
       }
+      num_to_index[nums[i]] = i;
     }
 
-    return {order[left_i], order[right_i]};
+    return {};  // to avoid compile errors
   }
 };

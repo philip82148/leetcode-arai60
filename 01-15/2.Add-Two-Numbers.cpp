@@ -74,33 +74,9 @@ class Solution {
     return head;
   }
 
-  ListNode* addTwoNumbersIterative2(ListNode* l1, ListNode* l2) {
-    ListNode *head = nullptr, *previous = nullptr;
-    bool carry_over = false;
-    while (l1 || l2 || carry_over) {
-      auto current = new ListNode();
-      if (!head) head = current;
-
-      if (l1) current->val += l1->val;
-      if (l2) current->val += l2->val;
-      if (carry_over) ++current->val;
-
-      carry_over = current->val >= 10;
-      if (carry_over) current->val -= 10;
-
-      if (l1) l1 = l1->next;
-      if (l2) l2 = l2->next;
-
-      if (previous) previous->next = current;
-      previous = current;
-    }
-
-    return head;
-  }
-
   ListNode* addTwoNumbersIterativeUsingSentinel(ListNode* l1, ListNode* l2) {
-    auto sentinel = new ListNode();
-    auto previous = sentinel;
+    ListNode sentinel;
+    auto previous = &sentinel;
     bool carry_over = false;
     while (l1 || l2 || carry_over) {
       auto current = new ListNode();
@@ -119,9 +95,6 @@ class Solution {
       previous = current;
     }
 
-    auto head = sentinel->next;
-    delete sentinel;
-
-    return head;
+    return sentinel.next;
   }
 };

@@ -54,22 +54,73 @@ class Solution {
     l1 = l1->next;
     l2 = l2->next;
 
-    auto parent = head;
+    auto previous = head;
     while (l1 || l2 || carry_over) {
-      auto child = new ListNode();
-      if (l1 != nullptr) child->val += l1->val;
-      if (l2 != nullptr) child->val += l2->val;
-      if (carry_over) ++child->val;
+      auto current = new ListNode();
+      if (l1) current->val += l1->val;
+      if (l2) current->val += l2->val;
+      if (carry_over) ++current->val;
 
-      carry_over = child->val >= 10;
-      if (carry_over) child->val -= 10;
+      carry_over = current->val >= 10;
+      if (carry_over) current->val -= 10;
 
       if (l1) l1 = l1->next;
       if (l2) l2 = l2->next;
 
-      parent->next = child;
-      parent = child;
+      previous->next = current;
+      previous = current;
     }
+
+    return head;
+  }
+
+  ListNode* addTwoNumbersIterative2(ListNode* l1, ListNode* l2) {
+    ListNode *head = nullptr, *previous = nullptr;
+    bool carry_over = false;
+    while (l1 || l2 || carry_over) {
+      auto current = new ListNode();
+      if (!head) head = current;
+
+      if (l1) current->val += l1->val;
+      if (l2) current->val += l2->val;
+      if (carry_over) ++current->val;
+
+      carry_over = current->val >= 10;
+      if (carry_over) current->val -= 10;
+
+      if (l1) l1 = l1->next;
+      if (l2) l2 = l2->next;
+
+      if (previous) previous->next = current;
+      previous = current;
+    }
+
+    return head;
+  }
+
+  ListNode* addTwoNumbersIterativeUsingSentinel(ListNode* l1, ListNode* l2) {
+    auto sentinel = new ListNode();
+    auto previous = sentinel;
+    bool carry_over = false;
+    while (l1 || l2 || carry_over) {
+      auto current = new ListNode();
+
+      if (l1) current->val += l1->val;
+      if (l2) current->val += l2->val;
+      if (carry_over) ++current->val;
+
+      carry_over = current->val >= 10;
+      if (carry_over) current->val -= 10;
+
+      if (l1) l1 = l1->next;
+      if (l2) l2 = l2->next;
+
+      previous->next = current;
+      previous = current;
+    }
+
+    auto head = sentinel->next;
+    delete sentinel;
 
     return head;
   }

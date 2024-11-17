@@ -43,4 +43,34 @@ class Solution {
 
     return sum;
   }
+
+ public:
+  ListNode* addTwoNumbersIterative(ListNode* l1, ListNode* l2) {
+    auto head = new ListNode(l1->val + l2->val);
+
+    bool carry_over = head->val >= 10;
+    if (carry_over) head->val -= 10;
+
+    l1 = l1->next;
+    l2 = l2->next;
+
+    auto parent = head;
+    while (l1 || l2 || carry_over) {
+      auto child = new ListNode();
+      if (l1 != nullptr) child->val += l1->val;
+      if (l2 != nullptr) child->val += l2->val;
+      if (carry_over) ++child->val;
+
+      carry_over = child->val >= 10;
+      if (carry_over) child->val -= 10;
+
+      if (l1) l1 = l1->next;
+      if (l2) l2 = l2->next;
+
+      parent->next = child;
+      parent = child;
+    }
+
+    return head;
+  }
 };

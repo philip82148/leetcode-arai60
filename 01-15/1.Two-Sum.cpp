@@ -16,15 +16,19 @@ class Solution {
       return nums[a] < nums[b];
     });
 
-    int right_i = nums.size() - 1;
-    for (int left_i = 0; left_i < nums.size(); ++left_i) {
-      auto left = nums[order[left_i]];
-      while (right_i >= 0 && nums[order[right_i]] > target - left) --right_i;
-      if (nums[order[right_i]] == target - left && left_i != right_i) {
-        return {order[left_i], order[right_i]};
+    int left_i = 0, right_i = nums.size() - 1;
+    while (true) {
+      auto left = nums[order[left_i]], right = nums[order[right_i]];
+      auto sum = left + right;
+      if (sum < target) {
+        left_i++;
+      } else if (sum > target) {
+        right_i--;
+      } else {
+        break;
       }
     }
 
-    return {};  // to avoid compile errors
+    return {order[left_i], order[right_i]};
   }
 };

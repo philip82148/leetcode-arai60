@@ -28,17 +28,17 @@ class Solution {
     if (l2) sum->val += l2->val;
     if (carry) ++sum->val;
 
-    bool next_carry_over = false;
+    bool next_carry = false;
     if (sum->val >= 10) {
-      next_carry_over = true;
+      next_carry = true;
       sum->val -= 10;
     }
 
     ListNode* next_l1 = l1 ? l1->next : nullptr;
     ListNode* next_l2 = l2 ? l2->next : nullptr;
 
-    if (next_l1 || next_l2 || next_carry_over) {
-      sum->next = AddTwoNumbersAux(next_l1, next_l2, next_carry_over);
+    if (next_l1 || next_l2 || next_carry) {
+      sum->next = AddTwoNumbersAux(next_l1, next_l2, next_carry);
     }
 
     return sum;

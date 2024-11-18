@@ -24,8 +24,8 @@ class Solution {
  private:
   ListNode* _addTwoNumbers(ListNode* l1, ListNode* l2, bool carry_over) {
     auto sum = new ListNode();
-    if (l1 != nullptr) sum->val += l1->val;
-    if (l2 != nullptr) sum->val += l2->val;
+    if (l1) sum->val += l1->val;
+    if (l2) sum->val += l2->val;
     if (carry_over) ++sum->val;
 
     bool next_carry_over = false;

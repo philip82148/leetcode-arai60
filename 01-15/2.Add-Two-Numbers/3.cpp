@@ -75,27 +75,27 @@ class Solution {
   }
 
   ListNode* addTwoNumbersIterativeUsingSentinel(ListNode* l1, ListNode* l2) {
-    ListNode dummy;
-    auto node = &dummy;
+    ListNode sentinel;
+    auto previous = &sentinel;
+    bool carry_over = false;
+    while (l1 || l2 || carry_over) {
+      auto current = new ListNode();
 
-    int carry = 0;
-    while (l1 || l2 || carry) {
-      int sum = carry;
+      if (l1) current->val += l1->val;
+      if (l2) current->val += l2->val;
 
-      if (l1) {
-        sum += l1->val;
-        l1 = l1->next;
-      }
+      if (carry_over) ++current->val;
+      carry_over = current->val >= 10;
 
-      if (l2) {
-        sum += l2->val;
-        l2 = l2->next;
-      }
+      if (carry_over) current->val -= 10;
 
-      node = node->next = new ListNode(sum % 10);
-      carry = sum / 10;
+      if (l1) l1 = l1->next;
+      if (l2) l2 = l2->next;
+
+      previous->next = current;
+      previous = current;
     }
 
-    return dummy.next;
+    return sentinel.next;
   }
 };

@@ -46,35 +46,6 @@ class Solution {
 
  public:
   ListNode* addTwoNumbersIterative(ListNode* l1, ListNode* l2) {
-    auto head = new ListNode(l1->val + l2->val);
-
-    bool carry_over = head->val >= 10;
-    if (carry_over) head->val -= 10;
-
-    l1 = l1->next;
-    l2 = l2->next;
-
-    auto previous = head;
-    while (l1 || l2 || carry_over) {
-      auto current = new ListNode();
-      if (l1) current->val += l1->val;
-      if (l2) current->val += l2->val;
-      if (carry_over) ++current->val;
-
-      carry_over = current->val >= 10;
-      if (carry_over) current->val -= 10;
-
-      if (l1) l1 = l1->next;
-      if (l2) l2 = l2->next;
-
-      previous->next = current;
-      previous = current;
-    }
-
-    return head;
-  }
-
-  ListNode* addTwoNumbersIterativeUsingSentinel(ListNode* l1, ListNode* l2) {
     ListNode dummy;
     auto node = &dummy;
 

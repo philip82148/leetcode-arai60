@@ -85,8 +85,8 @@ class Solution {
       if (l2) current->val += l2->val;
 
       if (carry_over) ++current->val;
-      carry_over = current->val >= 10;
 
+      carry_over = current->val >= 10;
       if (carry_over) current->val -= 10;
 
       if (l1) l1 = l1->next;

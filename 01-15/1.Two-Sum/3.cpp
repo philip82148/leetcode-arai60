@@ -13,9 +13,9 @@ class Solution {
     unordered_map<int, int> num_to_index;
 
     for (int i = 0; i < nums.size(); i++) {
-      if (auto it = num_to_index.find(target - nums[i]);
-          it != num_to_index.end()) {
-        return {it->second, i};
+      auto diff = target - nums[i];
+      if (num_to_index.count(diff)) {
+        return {num_to_index[diff], i};
       }
       num_to_index[nums[i]] = i;
     }

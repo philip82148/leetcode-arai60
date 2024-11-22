@@ -67,7 +67,7 @@ class SolutionStream2 {
   }
 
  private:
-  static constexpr int kNotUsed = INT_MAX - 1;
+  static constexpr int kNotUsed = INT_MAX;
   static constexpr int kRepeated = INT_MAX - 1;
   vector<int> first_index_or_repeated;
   int index;

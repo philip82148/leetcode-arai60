@@ -1,15 +1,14 @@
 # 自分のVSCode用のCode Runnerという拡張機能用のMakefile
-# Code Runner側でmake run src=$fullFileName debug=no opt=noを実行するようにしている
+# Code Runner側でmake run main=$fullFileName debug=no opt=noを実行するようにしている
 
-src = main.cpp
+main = main.cpp
 debug = yes
 opt = yes
 
-ESCAPED_SRC = $(shell echo $(src) | sed -e 's/ /\\ /g')
+MAIN = $(shell echo $(main) | sed -e 's/ /\\ /g')
 
 OPTIONS = -Wno-sign-compare -Wno-char-subscripts
 DEFINES =
-SRCS = $(ESCAPED_SRC)
 
 ifneq ($(debug), no)
 OPTIONS += -fdiagnostics-color=always -Wall -Wextra -Wfloat-equal -ftrapv -fstack-protector-all -fsanitize=address,undefined -fno-omit-frame-pointer -g
@@ -19,5 +18,6 @@ ifneq ($(opt), no)
 OPTIONS += -O2
 endif
 
+.PHONY: run
 run: $(SRCS)
-	g++ -std=c++20 $(OPTIONS) $(DEFINES) $(SRCS) -o z.out && ./z.out
+	g++ -std=c++20 $(OPTIONS) $(DEFINES) $(MAIN) -o z.out && ./z.out

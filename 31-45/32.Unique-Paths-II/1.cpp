@@ -35,6 +35,7 @@ using namespace std;
 //
 //
 //
+//
 // L39(行数調整用コメント)
 class Solution {
  public:

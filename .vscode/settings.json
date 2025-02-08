@@ -1,5 +1,11 @@
 {
   "files.insertFinalNewline": true,
   "files.trimTrailingWhitespace": true,
-  "cSpell.words": ["arai", "leetcode"]
+  "cSpell.words": [
+    "arai",
+    "leetcode"
+  ],
+  "github.copilot.enable": {
+    "*": false
+  }
 }

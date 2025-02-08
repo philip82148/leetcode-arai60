@@ -19,15 +19,25 @@ using namespace std;
 // switchで書いていたロジックをclosing_to_openingを使った
 // ifに書き換えるという流れ
 // <疑問・不安点(・個人的な感想、違う意見があれば教えてほしいもの)>
-// - L39を空けるか否か
+// - L49を空けるか否か
 // - closing_to_openingとopening_bracketsのどちらを先に宣言するか
 //   (細かいけど...)
+// <他の人のを見てコメント>
+// - なるほど。そういえばValid ParenthesesもCSZAPで触れていたかもしれない。
+// https://discord.com/channels/1084280443945353267/1201211204547383386/1202541275115425822
+// - そうか、closing_to_openingじゃなくてもopening_to_closingでもよかったのか…
+//   うーん、でもその場合2回map::findすることになるな
+// - stackに番兵を入れてstack::emptyを呼び出さなくていいようにしている
+//   ものがあった。頭いい。
+// - closing_to_opening定数だからスネークケースじゃなかったわ。
 //
 //
 //
 //
 //
-// L30(行数調整用コメント)
+//
+//
+// L40(行数調整用コメント)
 class Solution {
  public:
   bool isValid(string s) {

@@ -13,24 +13,23 @@ using namespace std;
 class Solution {
  public:
   bool isValid(const string &brackets) {
-    static const map<char, char> closing_to_opening{
+    static const map<char, char> kClosingToOpening{
         {')', '('},
         {'}', '{'},
         {']', '['},
     };
     stack<char> opening_brackets;
+    opening_brackets.push('*');  // sentinel
     for (auto bracket : brackets) {
-      if (auto it = closing_to_opening.find(bracket);
-          it != closing_to_opening.end()) {
+      if (auto it = kClosingToOpening.find(bracket);
+          it != kClosingToOpening.end()) {
         auto opening = it->second;
-        if (!(!opening_brackets.empty() && opening_brackets.top() == opening)) {
-          return false;
-        }
+        if (opening_brackets.top() != opening) return false;
         opening_brackets.pop();
       } else {
         opening_brackets.push(bracket);
       }
     }
-    return opening_brackets.empty();
+    return opening_brackets.size() == 1;
   }
 };

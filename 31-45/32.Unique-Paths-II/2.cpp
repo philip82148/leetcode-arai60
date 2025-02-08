@@ -1,4 +1,3 @@
-
 #if __has_include("../../debug.hpp")
 #include "../../debug.hpp"
 #endif

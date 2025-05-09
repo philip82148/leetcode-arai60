@@ -1,5 +1,5 @@
-#if __has_include("../../debug.hpp")
-#include "../../debug.hpp"
+#if __has_include("../../../debug.hpp")
+#include "../../../debug.hpp"
 #endif
 // ここまでローカルでのデバッグ用なので気にしないでください --------------------
 
